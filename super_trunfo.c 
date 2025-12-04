@@ -6,8 +6,23 @@
 
 int main() {
   // Área para definição das variáveis para armazenar as propriedades das cidades
+// ----- CARTA 1 -----
+
+  // O estado tem uma letra de A até H.
+  char estado1;
+
+  // O código da carta é a letra de uma estado seguido com um número, exemplo A01, B02.
+  char codigoCarta1[4];
+
+  // O nome da cidade pode ter até 50 caracteres.
+  char nomeCidade1[50];
+
 
   // Área para entrada de dados
+  int populacao1;
+  float area1;
+  float pib1;
+  int pontosTuristicos1;
 
   // Área para exibição dos dados da cidade
 
