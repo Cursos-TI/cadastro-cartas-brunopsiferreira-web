@@ -19,10 +19,14 @@ int main()
   char nomeCidade1[50];
 
   // Área para entrada de dados
-  int populacao1;
+  unsigned long int populacao1; // Nível mestre, convertido para unsigned long int
+  // int populacao1;
   float area1;
   float pib1;
   int pontosTuristicos1;
+  float densidade1;
+  float pibPerCapita1;
+  float superPoder1; // Nova variável para calcular o poder da carta
 
   // ----- CARTA 2 -----
 
@@ -36,10 +40,14 @@ int main()
   char nomeCidade2[50];
 
   // Área para entrada de dados
-  int populacao2;
+  unsigned long int populacao2; // Nível mestre, convertido para unsigned long int
+  // int populacao2;
   float area2;
   float pib2;
   int pontosTuristicos2;
+  float densidade2;
+  float pibPerCapita2;
+  float superPoder2; // Nova variável para calcular o poder da carta
 
   // Uma instrução para o usuário
 
@@ -58,8 +66,8 @@ int main()
   printf("Digite o nome da cidade: ");
   scanf(" %49[^\n]", nomeCidade1); // lê até 49 caracteres ou até nova linha
 
-  printf("Digite a populacao: ");
-  scanf("%d", &populacao1);
+  printf("Digite a populacao: "); 
+  scanf("%lu", &populacao1); // Precisei alterar de $d para $lu, por ser unsigned long int
 
   printf("Digite a area em km²: ");
   scanf("%f", &area1);
@@ -81,7 +89,7 @@ int main()
   scanf(" %49[^\n]", nomeCidade2); // lê até 49 caracteres ou até nova linha
 
   printf("Digite a populacao: ");
-  scanf("%d", &populacao2);
+  scanf("%lu", &populacao2); // Precisei alterar de $d para $lu, por ser unsigned long int
 
   printf("Digite a area em km²: ");
   scanf("%f", &area2);
@@ -102,7 +110,7 @@ int main()
   printf("Estado: %c\n", estado1);
   printf("Codigo: %s\n", codigoCarta1);
   printf("Nome da Cidade: %s\n", nomeCidade1);
-  printf("População: %d\n", populacao1);
+  printf("População: %lu\n", populacao1); // Precisei alterar de $d para $lu, por ser unsigned long int
   printf("Área: %.2f km²\n", area1);
   printf("PIB: %.2f bilhoes de reais\n", pib1);
   printf("Número de Pontos Turísticos: %d\n", pontosTuristicos1);
@@ -113,7 +121,7 @@ int main()
   printf("Estado: %c\n", estado2);
   printf("Codigo: %s\n", codigoCarta2);
   printf("Nome da Cidade: %s\n", nomeCidade2);
-  printf("População: %d\n", populacao2);
+  printf("População: %lu\n", populacao2); // Precisei alterar de $d para $lu, por ser unsigned long int
   printf("Área: %.2f km²\n", area2);
   printf("PIB: %.2f bilhoes de reais\n", pib2);
   printf("Número de Pontos Turísticos: %d\n", pontosTuristicos2);
@@ -128,17 +136,18 @@ int main()
   // --- Carta 1 ---
 
   // Densidade = população ÷ área
-  float densidade1 = populacao1 / area1;
+  densidade1 = (float)populacao1 / area1; // População convertido para float
 
   // PIB per capita = PIB da cidade ÷ população
   // Como o PIB foi dado em bilhões sem formatação, precisa converter em float
   // O pib será em reais, então exige a necessidade de fazer a multiplicação por 1000000000
-  float pibPerCapita1 = (pib1 * 1000000000.0) / populacao1;
+  pibPerCapita1 = (pib1 * 1000000000.0) / populacao1; // Não precisa mais colocar o float na frente, pois declarei ele acima
+  superPoder1 = (float)populacao1 + area1 + (pib1 * 1000000000.0) + (float)pontosTuristicos1 + pibPerCapita1 + (1.0f / densidade1);
 
-
- // --- Carta 2 ---
-  float densidade2 = populacao2 / area2;
-  float pibPerCapita2 = (pib2 * 1000000000.0)/ populacao2;
+  // --- Carta 2 ---
+  densidade2 = (float)populacao2 / area2; // População convertido para float
+  pibPerCapita2 = (pib2 * 1000000000.0) / populacao2; // Não precisa mais colocar o float na frente, pois declarei ele acima
+  superPoder2 = (float)populacao2 + area2 + (pib2 * 1000000000.0) + (float)pontosTuristicos2 + pibPerCapita2 + (1.0f / densidade2);
 
   // Exibição dos resultados
   printf("\n");
@@ -149,7 +158,7 @@ int main()
   printf("Estado: %c\n", estado1);
   printf("Codigo: %s\n", codigoCarta1);
   printf("Nome da Cidade: %s\n", nomeCidade1);
-  printf("Populacao: %d\n", populacao1);
+  printf("Populacao: %lu\n", populacao1); // Precisei alterar de $d para $lu, por ser unsigned long int
   printf("Area: %.2f km²\n", area1);
   printf("PIB: %.2f bilhoes de reais\n", pib1);
   printf("Numero de Pontos Turisticos: %d\n", pontosTuristicos1);
@@ -164,7 +173,7 @@ int main()
   printf("Estado: %c\n", estado2);
   printf("Codigo: %s\n", codigoCarta2);
   printf("Nome da Cidade: %s\n", nomeCidade2);
-  printf("Populacao: %d\n", populacao2);
+  printf("Populacao: %lu\n", populacao2); // Precisei alterar de $d para $lu, por ser unsigned long int
   printf("Area: %.2f km²\n", area2);
   printf("PIB: %.2f bilhoes de reais\n", pib2);
   printf("Numero de Pontos Turisticos: %d\n", pontosTuristicos2);
@@ -173,6 +182,39 @@ int main()
   printf("Densidade Populacional: %.2f hab/km²\n", densidade2);
   printf("PIB per Capita: %.2f reais\n", pibPerCapita2);
   printf("\n");
+
+  // Dados do Super Poder - Nível mestre
+  printf("\nCartas Cadastradas:\n");
+
+  printf("Carta 1: %s (%c) - Super Poder: %.2f\n", nomeCidade1, estado1, superPoder1);
+  printf("Carta 2: %s (%c) - Super Poder: %.2f\n", nomeCidade2, estado2, superPoder2);
+
+  // Comparando as cartas
+  // 1 será igual true e 0 será igual false
+ 
+  printf("\nComparação de Cartas:\n");
+
+  // População maior vence
+  // O operador vai "perguntar", populacao1 é maior que populacao2? Se sim, vai retornar 1 se não vai retornar 2, por isso (? 1:2)
+  printf("População: Carta %d venceu (%d)\n", (populacao1 > populacao2) ? 1 : 2, populacao1 > populacao2);
+
+  // Área maior vence
+  printf("Área: Carta %d venceu (%d)\n", (area1 > area2) ? 1 : 2, area1 > area2);
+
+  // PIB maior vence
+  printf("PIB: Carta %d venceu (%d)\n", (pib1 > pib2) ? 1 : 2, pib1 > pib2);
+
+  // Pontos Turísticos maior vence
+  printf("Pontos Turísticos: Carta %d venceu (%d)\n", (pontosTuristicos1 > pontosTuristicos2) ? 1 : 2, pontosTuristicos1 > pontosTuristicos2);
+
+  // Densidade Populacional menor vence
+  printf("Densidade Populacional: Carta %d venceu (%d)\n", (densidade1 < densidade2) ? 1 : 2, densidade1 < densidade2);
+
+  // PIB per Capita maior vence
+  printf("PIB per Capita: Carta %d venceu (%d)\n", (pibPerCapita1 > pibPerCapita2) ? 1 : 2, pibPerCapita1 > pibPerCapita2);
+
+  // Super Poder maior vence
+  printf("Super Poder: Carta %d venceu (%d)\n", (superPoder1 > superPoder2) ? 1 : 2, superPoder1 > superPoder2);
 
   return 0;
 }
